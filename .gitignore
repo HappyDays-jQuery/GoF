@@ -1,0 +1,4 @@
+/build/
+/vendor/
+/var/*
+!/var/.gitkeep

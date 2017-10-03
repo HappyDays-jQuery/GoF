@@ -1,0 +1,51 @@
+{
+    "name": "gof/dp",
+    "description": "デザインパターンサンプル",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "HappyDays-jQuery",
+            "email": "developer@jquery.tokyo"
+        }
+    ],
+    "autoload": {
+    "psr-4": {
+      "GoF\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "GoF\\": "tests/"
+    }
+  },
+  "require": {
+  },
+  "require-dev": {
+    "phpunit/phpunit": "*",
+    "squizlabs/php_codesniffer": "3.0",
+    "phploc/phploc": "*",
+    "pdepend/pdepend" : "*",
+    "phpmd/phpmd" : "*",
+    "sebastian/phpcpd": "*"
+  },
+  "config": {
+    "platform": {
+      "php": "7.1.8"
+    }
+  },
+  "scripts" :{
+    "test": [
+      "phpmd src text ./phpmd.xml",
+      "phpcs src",
+      "phpunit"
+    ],
+    "build": [
+      "rm -rf ./build; mkdir -p ./build/logs ./build/pdepend",
+      "pdepend --jdepend-xml=./build/logs/jdepend.xml --jdepend-chart=./build/pdepend/dependencies.svg --overview-pyramid=./build/pdepend/overview-pyramid.svg src",
+      "phploc --log-csv ./build/logs/phploc.csv src",
+      "phpcs --report=checkstyle --report-file=./build/logs/checkstyle.xml --standard=phpcs.xml src",
+      "phpunit --coverage-html build/coverage"
+    ]
+  }
+}
